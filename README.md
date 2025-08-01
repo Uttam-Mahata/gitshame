@@ -268,7 +268,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - **GitHub API** for providing comprehensive user data
 - **Google Gemini** for AI-powered roast generation
 - **React & FastAPI** communities for excellent frameworks
-- **Open source contributors** who make projects like this possible
 
 ## 📞 Support
 
