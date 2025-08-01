@@ -275,9 +275,7 @@ const GitHubProfile: React.FC<GitHubProfileProps> = ({ username, onReset }) => {
         <button className="primary-button" onClick={onReset}>
           Roast Another User
         </button>
-        <div className="rate-limit-info">
-          API Calls Remaining: {rateLimit.remaining} / {rateLimit.limit}
-        </div>
+     
       </div>
     </div>
   );
