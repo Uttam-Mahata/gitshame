@@ -276,7 +276,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - **Discussions**: [GitHub Discussions](https://github.com/Uttam-Mahata/gitshame/discussions)
 
 ---
-
-**Made with ❤️ and a lot of ☕ by developers who know the pain of bad commit messages**
-
-*Remember: This is all in good fun! We celebrate the quirks that make every developer unique.* 🎉
