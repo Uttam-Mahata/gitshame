@@ -4,6 +4,33 @@
 
 GitShame is a full-stack web application that analyzes GitHub users' coding patterns, repository organization, and commit habits to generate humorous, personalized "roasts" using Google's Gemini AI with structured output.
 
+## 🤔 What Does It Do?
+
+GitShame transforms the mundane task of GitHub profile analysis into an entertaining experience by:
+
+- **🔍 Deep Profile Analysis**: Examines commit patterns, repository names, coding habits, and activity timelines
+- **🤖 AI-Powered Roasting**: Uses Google Gemini 2.0 Flash to generate clever, personalized roasts based on actual data
+- **📊 Visual Insights**: Creates interactive charts showing when you code, what languages you use, and your questionable commit messages
+- **🎭 Personality Profiling**: Categorizes developers into personas like "Night Owl Coder," "Commit Message Poet," or "Repository Hoarder"
+
+## 🎯 Why I Built GitShame
+
+As developers, we spend countless hours crafting perfect code, but our GitHub profiles tell the *real* story:
+
+- **😅 The 3 AM commits** that somehow work better than daytime code
+- **📝 Commit messages** that range from Shakespeare to "fix stuff"  
+- **🗂️ Repository names** that sound like either AI projects or sandwich ingredients
+- **📈 Coding patterns** that reveal we're either productivity ninjas or professional procrastinators
+
+I built GitShame because:
+
+1. **Developer Culture**: Our coding quirks deserve celebration, not judgment
+2. **AI Integration**: Wanted to experiment with Google Gemini's structured output capabilities
+3. **Full-Stack Practice**: Perfect project to combine React TypeScript frontend with FastAPI backend
+4. **Community Fun**: Give developers a lighthearted way to share and laugh about their coding habits
+
+GitShame turns GitHub analytics into entertainment while showcasing real technical skills in AI integration, data visualization, and modern web development.
+
 ![GitShame Demo](https://img.shields.io/badge/Status-Active-green)
 ![React](https://img.shields.io/badge/Frontend-React%20%2B%20TypeScript-blue)
 ![FastAPI](https://img.shields.io/badge/Backend-FastAPI%20%2B%20Python-green)
