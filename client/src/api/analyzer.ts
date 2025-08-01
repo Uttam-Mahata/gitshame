@@ -1,4 +1,6 @@
 import type { GitHubCommit, GitHubRepo, GitHubUser } from './github';
+import apiClient, { GitShameApiClient } from './client';
+import { ApiError } from './config';
 
 export interface UserAnalysis {
   commitPatterns: {
@@ -246,67 +248,39 @@ export async function generateRoastContent(analysis: UserAnalysis, user: GitHubU
   };
 }> {
   try {
-    // Try to fetch AI-generated roasts from backend
-    const response = await fetch('http://localhost:8000/generate-roasts', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        user: {
-          login: user.login,
-          name: user.name,
-          bio: user.bio,
-          public_repos: user.public_repos,
-          followers: user.followers,
-          following: user.following,
-          created_at: user.created_at,
-          avatar_url: user.avatar_url
-        },
-        repos: repos.map(repo => ({
-          name: repo.name,
-          description: repo.description,
-          language: repo.language,
-          stargazers_count: repo.stargazers_count,
-          forks_count: repo.forks_count,
-          created_at: repo.created_at,
-          updated_at: repo.updated_at
-        })),
-        commits: commits.map(commit => ({
-          message: commit.commit.message,
-          date: commit.commit.author.date
-        })),
-        analysis: analysis
-      })
-    });
-
-    if (response.ok) {
-      const data = await response.json();
-      if (data.roasts && data.roasts.length > 0) {
-        console.log(`Generated ${data.roasts.length} AI roasts from ${data.source} source`);
-        return {
-          roasts: data.roasts,
-          metadata: {
-            source: data.source,
-            overall_tone: data.overall_tone,
-            categories: data.metadata?.roast_categories,
-            severity_levels: data.metadata?.severity_levels
-          }
-        };
+    // Transform data to API format
+    const requestData = GitShameApiClient.transformToApiFormat(user, repos, commits, analysis);
+    
+    // Call the backend API
+    const response = await apiClient.generateRoasts(requestData);
+    
+    console.log(`Generated ${response.roasts.length} AI roasts from ${response.source} source`);
+    
+    return {
+      roasts: response.roasts,
+      metadata: {
+        source: response.source,
+        overall_tone: response.overall_tone,
+        categories: response.metadata?.roast_categories,
+        severity_levels: response.metadata?.severity_levels
+      }
+    };
+    
+  } catch (error) {
+    console.error('Error generating AI roasts:', error);
+    
+    // Provide more specific error handling
+    if (error instanceof ApiError) {
+      if (error.status === 0) {
+        console.warn('Backend not available, falling back to static roasts');
+      } else if (error.status >= 500) {
+        console.warn('Backend server error, falling back to static roasts');
+      } else {
+        console.warn(`Backend API error (${error.status}), falling back to static roasts`);
       }
     }
     
-    console.warn('No roasts received from backend, falling back to static roasts');
-    const staticRoasts = generateStaticRoasts(analysis, user);
-    return {
-      roasts: staticRoasts,
-      metadata: {
-        source: 'static_fallback',
-        overall_tone: 'sarcastic'
-      }
-    };
-  } catch (error) {
-    console.error('Error generating AI roasts:', error);
+    // Fallback to static roasts
     const staticRoasts = generateStaticRoasts(analysis, user);
     return {
       roasts: staticRoasts,
