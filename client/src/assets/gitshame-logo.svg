@@ -1,0 +1,70 @@
+<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <!-- Demon character -->
+  <g transform="translate(256, 256)">
+    <!-- Horns -->
+    <path d="M-60,-120 Q-80,-140 -70,-160 Q-65,-180 -45,-170 Q-40,-150 -35,-130 Z" fill="#8B0000" stroke="#4A0000" stroke-width="2"/>
+    <path d="M-35,-130 Q-20,-145 -10,-140 Q0,-150 15,-145 Q20,-135 10,-125 Z" fill="#8B0000" stroke="#4A0000" stroke-width="2"/>
+    <path d="M10,-125 Q25,-140 35,-135 Q45,-145 60,-140 Q80,-150 70,-130 Q65,-110 45,-120 Z" fill="#8B0000" stroke="#4A0000" stroke-width="2"/>
+    <path d="M45,-120 Q60,-105 55,-85 Q50,-70 35,-75 Q30,-90 25,-105 Z" fill="#8B0000" stroke="#4A0000" stroke-width="2"/>
+    
+    <!-- Head -->
+    <circle cx="0" cy="-40" r="80" fill="#1a1a1a" stroke="#333" stroke-width="3"/>
+    
+    <!-- Face -->
+    <circle cx="0" cy="-40" r="70" fill="#DC143C"/>
+    
+    <!-- Eyes -->
+    <ellipse cx="-25" cy="-55" rx="12" ry="15" fill="#000"/>
+    <ellipse cx="25" cy="-55" rx="12" ry="15" fill="#000"/>
+    <ellipse cx="-22" cy="-58" rx="3" ry="4" fill="#FF0000"/>
+    <ellipse cx="28" cy="-58" rx="3" ry="4" fill="#FF0000"/>
+    
+    <!-- Evil smile -->
+    <path d="M-30,-25 Q0,-15 30,-25" stroke="#000" stroke-width="4" fill="none"/>
+    <path d="M-25,-22 Q0,-12 25,-22" stroke="#8B0000" stroke-width="2" fill="none"/>
+    
+    <!-- Body -->
+    <ellipse cx="0" cy="20" rx="60" ry="80" fill="#1a1a1a"/>
+    
+    <!-- Arms -->
+    <ellipse cx="-70" cy="0" rx="20" ry="60" fill="#1a1a1a" transform="rotate(-20)"/>
+    <ellipse cx="70" cy="0" rx="20" ry="60" fill="#1a1a1a" transform="rotate(20)"/>
+    
+    <!-- Hands -->
+    <circle cx="-85" cy="45" r="18" fill="#DC143C"/>
+    <circle cx="85" cy="45" r="18" fill="#DC143C"/>
+    
+    <!-- Pitchfork in right hand -->
+    <g transform="translate(85, 45)">
+      <!-- Handle -->
+      <rect x="-2" y="0" width="4" height="60" fill="#8B4513"/>
+      <!-- Prongs -->
+      <rect x="-15" y="-5" width="4" height="15" fill="#FFD700"/>
+      <rect x="-8" y="-8" width="4" height="18" fill="#FFD700"/>
+      <rect x="-1" y="-5" width="4" height="15" fill="#FFD700"/>
+      <rect x="6" y="-8" width="4" height="18" fill="#FFD700"/>
+      <rect x="13" y="-5" width="4" height="15" fill="#FFD700"/>
+      <!-- Flames -->
+      <ellipse cx="-13" cy="-12" rx="3" ry="8" fill="#FF4500"/>
+      <ellipse cx="-6" cy="-15" rx="3" ry="8" fill="#FF6600"/>
+      <ellipse cx="1" cy="-12" rx="3" ry="8" fill="#FF4500"/>
+      <ellipse cx="8" cy="-15" rx="3" ry="8" fill="#FF6600"/>
+      <ellipse cx="15" cy="-12" rx="3" ry="8" fill="#FF4500"/>
+    </g>
+    
+    <!-- GitHub mascot (Octocat) in left hand -->
+    <g transform="translate(-85, 45) scale(0.8)">
+      <circle cx="0" cy="0" r="15" fill="#f0f6fc"/>
+      <circle cx="-6" cy="-3" r="2" fill="#000"/>
+      <circle cx="6" cy="-3" r="2" fill="#000"/>
+      <path d="M-4,3 Q0,6 4,3" stroke="#000" stroke-width="1" fill="none"/>
+      <!-- Cat ears -->
+      <path d="M-10,-12 L-15,-20 L-5,-15 Z" fill="#f0f6fc"/>
+      <path d="M10,-12 L15,-20 L5,-15 Z" fill="#f0f6fc"/>
+    </g>
+  </g>
+  
+  <!-- Text -->
+  <text x="256" y="400" text-anchor="middle" font-family="Arial, sans-serif" font-size="48" font-weight="bold" fill="#333">GitShame</text>
+  <text x="256" y="450" text-anchor="middle" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="#DC143C" transform="rotate(-5 256 450)">SHAME</text>
+</svg>
