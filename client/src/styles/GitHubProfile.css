@@ -1,0 +1,404 @@
+/* GitHub Profile Component Styles */
+.github-profile {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: #0d1117;
+  border-radius: 6px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+}
+
+.profile-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #30363d;
+}
+
+.user-info {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem;
+}
+
+.avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 1px solid #30363d;
+}
+
+.user-details h2 {
+  margin: 0;
+  font-size: 1.75rem;
+  color: #f0f6fc;
+}
+
+.user-details h3 {
+  margin: 0.25rem 0 0.75rem;
+  font-size: 1.25rem;
+  color: #8b949e;
+  font-weight: 400;
+}
+
+.bio {
+  margin: 0.5rem 0 1rem;
+  color: #c9d1d9;
+  max-width: 500px;
+}
+
+.stats {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.stat-count {
+  font-weight: 600;
+  font-size: 1.25rem;
+  color: #f0f6fc;
+}
+
+.stat-label {
+  font-size: 0.875rem;
+  color: #8b949e;
+}
+
+.github-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #58a6ff;
+  text-decoration: none;
+  font-size: 0.875rem;
+  border: 1px solid #30363d;
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.github-link:hover {
+  background-color: #1f6feb1a;
+  border-color: #1f6feb66;
+}
+
+.github-link svg {
+  margin-left: 0.25rem;
+}
+
+/* Roast Section */
+.roast-container {
+  background-color: #161b22;
+  border-radius: 6px;
+  border: 1px solid #30363d;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.roast-header {
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  color: #f0f6fc;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.fire-emoji {
+  animation: flame 0.5s infinite alternate;
+}
+
+@keyframes flame {
+  from { transform: scale(1); }
+  to { transform: scale(1.2); }
+}
+
+.roasts {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.roast-card {
+  background-color: #0d1117;
+  border: 1px solid #30363d;
+  border-radius: 6px;
+  padding: 1rem;
+}
+
+.roast-card p {
+  margin: 0;
+  color: #f0f6fc;
+  font-size: 1.1rem;
+  line-height: 1.5;
+}
+
+/* Data Insights */
+.data-insights {
+  margin-bottom: 2rem;
+}
+
+.section {
+  margin-bottom: 2rem;
+}
+
+.section h3 {
+  color: #f0f6fc;
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid #30363d;
+  padding-bottom: 0.5rem;
+}
+
+.insights-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1rem;
+}
+
+.insight-card {
+  background-color: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 6px;
+  padding: 1rem;
+}
+
+.insight-card h4 {
+  color: #f0f6fc;
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.chart-placeholder {
+  height: 150px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-around;
+  gap: 0.5rem;
+}
+
+.chart-bar {
+  flex: 1;
+  min-height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px 4px 0 0;
+  position: relative;
+  transition: height 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.chart-bar span {
+  position: absolute;
+  bottom: -20px;
+  font-size: 0.75rem;
+  color: #8b949e;
+  transform: rotate(-45deg);
+  transform-origin: left top;
+  white-space: nowrap;
+}
+
+.emoji-list, .language-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.emoji-item, .language-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem;
+  background-color: #0d1117;
+  border-radius: 4px;
+}
+
+.emoji {
+  font-size: 1.5rem;
+}
+
+.count, .language-count {
+  color: #8b949e;
+  font-size: 0.875rem;
+}
+
+.language-name {
+  color: #f0f6fc;
+}
+
+.commit-messages {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.commit-message {
+  padding: 0.5rem;
+  background-color: #0d1117;
+  border-radius: 4px;
+  color: #f0f6fc;
+  font-style: italic;
+  font-size: 0.875rem;
+}
+
+.no-data {
+  color: #8b949e;
+  font-style: italic;
+  text-align: center;
+}
+
+/* Actions */
+.actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.primary-button {
+  background-color: #238636;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.primary-button:hover {
+  background-color: #2ea043;
+}
+
+.rate-limit-info {
+  font-size: 0.875rem;
+  color: #8b949e;
+}
+
+/* Loading State */
+.github-profile.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+}
+
+.loading-container {
+  text-align: center;
+  width: 100%;
+  max-width: 400px;
+}
+
+.loading-icon {
+  margin-bottom: 1.5rem;
+  animation: pulse 2s infinite;
+  color: #58a6ff;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+.loading-bar {
+  width: 100%;
+  height: 8px;
+  background-color: #161b22;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+
+.loading-progress {
+  height: 100%;
+  background-color: #1f6feb;
+  border-radius: 4px;
+  transition: width 0.3s ease-in-out;
+}
+
+.loading-text {
+  color: #8b949e;
+  font-size: 0.875rem;
+}
+
+/* Error State */
+.github-profile.error {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+}
+
+.error-container {
+  text-align: center;
+  width: 100%;
+  max-width: 400px;
+}
+
+.error-icon {
+  margin-bottom: 1.5rem;
+  color: #f85149;
+}
+
+.error-container h2 {
+  color: #f0f6fc;
+  margin-bottom: 0.5rem;
+}
+
+.error-container p {
+  color: #8b949e;
+  margin-bottom: 1.5rem;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .github-profile {
+    padding: 1rem;
+  }
+  
+  .profile-header {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .github-link {
+    align-self: flex-start;
+    margin-top: 1rem;
+  }
+  
+  .user-info {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .user-details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .stats {
+    justify-content: center;
+  }
+  
+  .actions {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .rate-limit-info {
+    order: -1;
+  }
+}
