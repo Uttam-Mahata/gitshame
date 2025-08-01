@@ -9,6 +9,30 @@ GitShame is a full-stack web application that analyzes GitHub users' coding patt
 ![FastAPI](https://img.shields.io/badge/Backend-FastAPI%20%2B%20Python-green)
 ![AI](https://img.shields.io/badge/AI-Google%20Gemini-orange)
 
+## 📸 Demo Screenshots
+
+### 🏠 Home Page - Search Interface
+![GitShame Home](docs/images/demo-home.png)
+*Clean, GitHub-inspired search interface with custom GitShame branding*
+
+### 👤 Profile Analysis - AI Roasts in Action
+![GitShame Profile](docs/images/demo-profile.png)
+*Real-time AI-powered roast generation with user profile display*
+
+### 📊 Insights Dashboard - Commit Patterns & Analysis
+![GitShame Analysis](docs/images/demo-analysis.png)
+*Interactive charts showing commit habits, language usage, and coding patterns*
+
+## 🎥 Live Demo
+
+Try GitShame live at: **[Your Deployment URL]** *(Coming Soon)*
+
+Or run locally with these example users:
+- `uttam-mahata` - Full Stack Developer with diverse projects
+- `torvalds` - Linux creator with extensive commit history
+- `gaearon` - React core team member
+- `rich-harris` - Svelte framework creator
+
 ## ✨ Features
 
 - 🤖 **AI-Powered Roasts**: Uses Google Gemini 2.0 Flash with structured output for clever, personalized roasts
@@ -18,6 +42,11 @@ GitShame is a full-stack web application that analyzes GitHub users' coding patt
 - ⚡ **Fast API**: RESTful FastAPI backend with comprehensive error handling
 - 🛡️ **Type Safety**: Full TypeScript implementation with proper error boundaries
 - 🌐 **CORS Ready**: Properly configured for development and production
+- 📈 **Visual Analytics**: Interactive charts for commit timing and language usage
+- 🔍 **Smart Search**: GitHub username validation with helpful suggestions
+- 💡 **Roast Categories**: Organized roasts by coding habits, repo patterns, and more
+
+*See all features in action in our [demo screenshots](#-demo-screenshots)!*
 
 ## 🏗️ Architecture
 
@@ -90,12 +119,14 @@ GitShame is a full-stack web application that analyzes GitHub users' coding patt
 
 ## 📱 Usage
 
-1. **Enter a GitHub username** in the search box
+### Getting Started
+1. **Enter a GitHub username** in the search box (see [Home Demo](#-home-page---search-interface))
 2. **Wait for analysis** - The app fetches and analyzes the user's data
-3. **Get roasted!** - Enjoy AI-generated, personalized roasts
-4. **View insights** - Check commit patterns and coding habits
+3. **Get roasted!** - Enjoy AI-generated, personalized roasts (see [Profile Demo](#-profile-analysis---ai-roasts-in-action))
+4. **View insights** - Check commit patterns and coding habits (see [Analysis Demo](#-insights-dashboard---commit-patterns--analysis))
 
 ### Example Usernames to Try
+- `uttam-mahata` - Full Stack Developer (Featured in demo!)
 - `torvalds` - Linux creator
 - `gaearon` - React core team
 - `rich-harris` - Svelte creator
