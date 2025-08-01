@@ -12,6 +12,12 @@ const GitHubProfile: React.FC<GitHubProfileProps> = ({ username, onReset }) => {
   const [userData, setUserData] = useState<UserData | null>(null);
   const [analysis, setAnalysis] = useState<UserAnalysis | null>(null);
   const [roasts, setRoasts] = useState<string[]>([]);
+  const [roastMetadata, setRoastMetadata] = useState<{
+    source: string;
+    overall_tone?: string;
+    categories?: string[];
+    severity_levels?: string[];
+  } | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [loadingProgress, setLoadingProgress] = useState({
@@ -26,6 +32,7 @@ const GitHubProfile: React.FC<GitHubProfileProps> = ({ username, onReset }) => {
       setUserData(null);
       setAnalysis(null);
       setRoasts([]);
+      setRoastMetadata(null);
       
       try {
         // Stage 1: Fetch user profile
@@ -46,8 +53,9 @@ const GitHubProfile: React.FC<GitHubProfileProps> = ({ username, onReset }) => {
         setLoadingProgress({ stage: 'roasting', percent: 90 });
         await new Promise(r => setTimeout(r, 700)); // For visual effect
         
-        const userRoasts = generateRoastContent(userAnalysis, data.user);
-        setRoasts(userRoasts);
+        const roastData = await generateRoastContent(userAnalysis, data.user, data.repos, data.commits);
+        setRoasts(roastData.roasts);
+        setRoastMetadata(roastData.metadata);
         
         setLoadingProgress({ stage: 'complete', percent: 100 });
       } catch (err) {
@@ -98,8 +106,8 @@ const GitHubProfile: React.FC<GitHubProfileProps> = ({ username, onReset }) => {
           <div className="loading-text">
             {loadingProgress.stage === 'profile' && 'Fetching GitHub profile...'}
             {loadingProgress.stage === 'analyzing' && 'Analyzing repository patterns...'}
-            {loadingProgress.stage === 'roasting' && 'Preparing savage roasts...'}
-            {loadingProgress.stage === 'complete' && 'Ready to serve humble pie!'}
+            {loadingProgress.stage === 'roasting' && 'Generating AI-powered roasts...'}
+            {loadingProgress.stage === 'complete' && 'Ready to serve some digital humble pie!'}
           </div>
         </div>
       </div>
@@ -129,7 +137,7 @@ const GitHubProfile: React.FC<GitHubProfileProps> = ({ username, onReset }) => {
     return null;
   }
 
-  const { user, repos, commits, rateLimit } = userData;
+  const { user } = userData;
 
   return (
     <div className="github-profile">
@@ -177,6 +185,18 @@ const GitHubProfile: React.FC<GitHubProfileProps> = ({ username, onReset }) => {
         <h2 className="roast-header">
           <span className="fire-emoji">🔥</span> The Roast <span className="fire-emoji">🔥</span>
         </h2>
+        {roastMetadata && (
+          <div className="roast-info">
+            <span className="roast-source">
+              {roastMetadata.source === 'ai' ? '🤖 AI-Powered' : 
+               roastMetadata.source === 'static_fallback' ? '📝 Static' : 
+               '🔄 Fallback'} Roasts
+            </span>
+            {roastMetadata.overall_tone && (
+              <span className="roast-tone">Tone: {roastMetadata.overall_tone}</span>
+            )}
+          </div>
+        )}
         <div className="roasts">
           {roasts.map((roast: string, index: number) => (
             <div key={index} className="roast-card">
@@ -194,25 +214,25 @@ const GitHubProfile: React.FC<GitHubProfileProps> = ({ username, onReset }) => {
               <h4>Time of Day</h4>
               <div className="chart-placeholder">
                 <div className="chart-bar" style={{ 
-                  height: `${(analysis.commitPatterns.timeOfDay.morning / (commits.length || 1)) * 100}%`,
+                  height: `${(analysis.commitPatterns.timeOfDay.morning / (analysis.userStats.publicContributions || 1)) * 100}%`,
                   backgroundColor: '#4CAF50'
                 }}>
                   <span>Morning</span>
                 </div>
                 <div className="chart-bar" style={{ 
-                  height: `${(analysis.commitPatterns.timeOfDay.afternoon / (commits.length || 1)) * 100}%`,
+                  height: `${(analysis.commitPatterns.timeOfDay.afternoon / (analysis.userStats.publicContributions || 1)) * 100}%`,
                   backgroundColor: '#2196F3'
                 }}>
                   <span>Afternoon</span>
                 </div>
                 <div className="chart-bar" style={{ 
-                  height: `${(analysis.commitPatterns.timeOfDay.evening / (commits.length || 1)) * 100}%`,
+                  height: `${(analysis.commitPatterns.timeOfDay.evening / (analysis.userStats.publicContributions || 1)) * 100}%`,
                   backgroundColor: '#FF9800'
                 }}>
                   <span>Evening</span>
                 </div>
                 <div className="chart-bar" style={{ 
-                  height: `${(analysis.commitPatterns.timeOfDay.night / (commits.length || 1)) * 100}%`, 
+                  height: `${(analysis.commitPatterns.timeOfDay.night / (analysis.userStats.publicContributions || 1)) * 100}%`,
                   backgroundColor: '#9C27B0'
                 }}>
                   <span>Night</span>

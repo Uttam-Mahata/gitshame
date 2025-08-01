@@ -236,14 +236,97 @@ export function analyzeUserData(
 }
 
 // Generate roast content based on user analysis
-export function generateRoastContent(analysis: UserAnalysis, user: GitHubUser): string[] {
+export async function generateRoastContent(analysis: UserAnalysis, user: GitHubUser, repos: GitHubRepo[], commits: GitHubCommit[]): Promise<{
+  roasts: string[];
+  metadata: {
+    source: string;
+    overall_tone?: string;
+    categories?: string[];
+    severity_levels?: string[];
+  };
+}> {
+  try {
+    // Try to fetch AI-generated roasts from backend
+    const response = await fetch('http://localhost:8000/generate-roasts', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        user: {
+          login: user.login,
+          name: user.name,
+          bio: user.bio,
+          public_repos: user.public_repos,
+          followers: user.followers,
+          following: user.following,
+          created_at: user.created_at,
+          avatar_url: user.avatar_url
+        },
+        repos: repos.map(repo => ({
+          name: repo.name,
+          description: repo.description,
+          language: repo.language,
+          stargazers_count: repo.stargazers_count,
+          forks_count: repo.forks_count,
+          created_at: repo.created_at,
+          updated_at: repo.updated_at
+        })),
+        commits: commits.map(commit => ({
+          message: commit.commit.message,
+          date: commit.commit.author.date
+        })),
+        analysis: analysis
+      })
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      if (data.roasts && data.roasts.length > 0) {
+        console.log(`Generated ${data.roasts.length} AI roasts from ${data.source} source`);
+        return {
+          roasts: data.roasts,
+          metadata: {
+            source: data.source,
+            overall_tone: data.overall_tone,
+            categories: data.metadata?.roast_categories,
+            severity_levels: data.metadata?.severity_levels
+          }
+        };
+      }
+    }
+    
+    console.warn('No roasts received from backend, falling back to static roasts');
+    const staticRoasts = generateStaticRoasts(analysis, user);
+    return {
+      roasts: staticRoasts,
+      metadata: {
+        source: 'static_fallback',
+        overall_tone: 'sarcastic'
+      }
+    };
+  } catch (error) {
+    console.error('Error generating AI roasts:', error);
+    const staticRoasts = generateStaticRoasts(analysis, user);
+    return {
+      roasts: staticRoasts,
+      metadata: {
+        source: 'static_fallback',
+        overall_tone: 'sarcastic'
+      }
+    };
+  }
+}
+
+// Generate static roast content as a fallback
+function generateStaticRoasts(analysis: UserAnalysis, user: GitHubUser): string[] {
   const roasts: string[] = [];
 
   // Account age roasts
   if (analysis.userStats.accountAge < 365) {
-    roasts.push(`Wow, your GitHub account is only ${Math.round(analysis.userStats.accountAge / 30)} months old. Still got that new developer smell!`);
+    roasts.push(`New to GitHub, @${user.login}? Your account is younger than some of my leftovers! 🍕`);
   } else if (analysis.userStats.accountAge > 3650) {
-    roasts.push(`Your GitHub account is ${Math.round(analysis.userStats.accountAge / 365)} years old. That's like a century in JavaScript framework years!`);
+    roasts.push(`Wow, @${user.login} has been on GitHub for ${Math.floor(analysis.userStats.accountAge/365)} years. Remember when "the cloud" meant bad weather? 👴`);
   }
 
   // Commit time patterns
@@ -255,51 +338,50 @@ export function generateRoastContent(analysis: UserAnalysis, user: GitHubUser): 
   );
   
   if (analysis.commitPatterns.timeOfDay.night === commitTimeMax) {
-    roasts.push("I see you're a night owl. Nothing says 'I make good decisions' like committing code at 3 AM!");
+    roasts.push(`Looks like someone's a night owl! Most commits after dark. Do you even know what the sun looks like? 🦉`);
   }
   
   if (analysis.commitPatterns.dayOfWeek.Saturday + analysis.commitPatterns.dayOfWeek.Sunday > 
      (analysis.commitPatterns.dayOfWeek.Monday + analysis.commitPatterns.dayOfWeek.Tuesday + 
       analysis.commitPatterns.dayOfWeek.Wednesday + analysis.commitPatterns.dayOfWeek.Thursday + 
       analysis.commitPatterns.dayOfWeek.Friday) / 5) {
-    roasts.push("Weekend commits? Your social life must be as empty as your test coverage.");
+    roasts.push(`Weekend warrior much? Your social life must be as non-existent as your test coverage. 🤓`);
   }
 
   // Emoji usage
   if (analysis.emojiUsage.count > 10) {
-    roasts.push(`${analysis.emojiUsage.count} emojis in your commits? Your code might be buggy, but your commits are definitely 🔥💯👌`);
+    roasts.push(`${analysis.emojiUsage.count} emojis in your commits? Your code might be buggy, but your commit messages are definitely 🔥 💯 👌`);
   } else if (analysis.emojiUsage.count === 0) {
-    roasts.push("Not a single emoji in your commits? You must be fun at parties.");
+    roasts.push(`Zero emojis in your commits? You must be fun at parties... 😐`);
   }
 
   // Commit messages
   if (analysis.commitLanguage.shortMessages > analysis.userStats.publicContributions / 3) {
-    roasts.push("Your commit messages are shorter than your attention span. 'fix', 'update', classic.");
+    roasts.push(`"Fixed stuff" is not a commit message, it's a cry for help. Try using more than ${analysis.commitLanguage.averageLength} characters next time! 📝`);
   }
   
   if (analysis.commitLanguage.questionableMessages.length > 0) {
-    const funnyMessage = analysis.commitLanguage.questionableMessages[Math.floor(Math.random() * analysis.commitLanguage.questionableMessages.length)];
-    roasts.push(`"${funnyMessage}" - Shakespeare? No, just your commit message. Pure poetry.`);
+    roasts.push(`"${analysis.commitLanguage.questionableMessages[0]}" - This commit message is a work of art. Did you let your cat walk on the keyboard? 🐱`);
   }
 
   // Repository patterns
   if (analysis.repoAnalysis.abandonedRepos > 0) {
-    roasts.push(`${analysis.repoAnalysis.abandonedRepos} abandoned repos. Commitment issues much?`);
+    roasts.push(`${analysis.repoAnalysis.abandonedRepos} abandoned repos? Your GitHub is starting to look like a project graveyard. RIP. ⚰️`);
   }
   
   if (analysis.repoAnalysis.namingPatterns.includes('hasDemo') || analysis.repoAnalysis.namingPatterns.includes('hasTutorial')) {
-    roasts.push("Another 'tutorial' repo? How many 'Hello World' apps does one person need?");
+    roasts.push(`Another "demo" repo? Let me guess, you followed a tutorial and pushed it without changing the name. How original! 👏`);
   }
   
   if (analysis.userStats.repoToStarRatio < 1) {
-    roasts.push(`${analysis.userStats.repoToStarRatio.toFixed(1)} stars per repo. Even your mom forgot to star your projects.`);
+    roasts.push(`${user.public_repos} repos but only ${Math.floor(analysis.userStats.repoToStarRatio * user.public_repos)} stars? Even your mom didn't star your projects! ⭐`);
   }
 
   // Follow ratio
   if (analysis.userStats.followRatio < 0.5) {
-    roasts.push(`You follow ${user.following} people but only have ${user.followers} followers. Desperate much?`);
+    roasts.push(`Following ${user.following} people but only ${user.followers} followers? GitHub isn't a dating app - they're not going to follow you back! 💔`);
   } else if (analysis.userStats.followRatio > 5) {
-    roasts.push(`${user.followers} followers? What are you, a GitHub influencer? #GitFluencer`);
+    roasts.push(`${user.followers} followers? What are you, a GitHub influencer? #GitFluencer 📸`);
   }
 
   return roasts;

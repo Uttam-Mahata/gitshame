@@ -114,6 +114,31 @@
   gap: 0.5rem;
 }
 
+.roast-info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  background-color: #161b22;
+  border-radius: 6px;
+  border: 1px solid #30363d;
+}
+
+.roast-source, .roast-tone {
+  font-size: 0.875rem;
+  color: #8b949e;
+  background-color: #21262d;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  border: 1px solid #30363d;
+}
+
+.roast-source {
+  color: #58a6ff;
+}
+
 .fire-emoji {
   animation: flame 0.5s infinite alternate;
 }

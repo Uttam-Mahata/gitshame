@@ -1,5 +1,7 @@
 import axios, { AxiosError, type AxiosInstance, type AxiosRequestConfig } from 'axios';
 
+
+
 // GitHub API response interfaces
 export interface GitHubUser {
   login: string;
