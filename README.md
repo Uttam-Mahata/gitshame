@@ -12,26 +12,18 @@ GitShame is a full-stack web application that analyzes GitHub users' coding patt
 ## 📸 Demo Screenshots
 
 ### 🏠 Home Page - Search Interface
-![GitShame Home](docs/images/demo-home.png)
+![GitShame Home](client/src/assets/demo1.png)
 *Clean, GitHub-inspired search interface with custom GitShame branding*
 
 ### 👤 Profile Analysis - AI Roasts in Action
-![GitShame Profile](docs/images/demo-profile.png)
+![GitShame Profile](client/src/assets/demo2.png)
 *Real-time AI-powered roast generation with user profile display*
 
 ### 📊 Insights Dashboard - Commit Patterns & Analysis
-![GitShame Analysis](docs/images/demo-analysis.png)
+![GitShame Analysis](client/src/assets/demo3.png)
 *Interactive charts showing commit habits, language usage, and coding patterns*
 
-## 🎥 Live Demo
 
-Try GitShame live at: **[Your Deployment URL]** *(Coming Soon)*
-
-Or run locally with these example users:
-- `uttam-mahata` - Full Stack Developer with diverse projects
-- `torvalds` - Linux creator with extensive commit history
-- `gaearon` - React core team member
-- `rich-harris` - Svelte framework creator
 
 ## ✨ Features
 
